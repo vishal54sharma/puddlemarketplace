@@ -1,0 +1,23 @@
+{% extends 'core/index.html' %}
+{% block title %} {{item.name}} {% endblock %}
+
+{% block content %}
+
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+        <div class="col-md-4">
+            <img src="{{item.image.url}}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+            <h5 class="card-title">{{item.name}}</h5>
+            <p class="card-text">{{item.category}}</p>
+            <p class="card-text">{{item.description}}</p>
+            <p class="card-text">{{item.price}}</p>
+            <p class="card-text"><small class="text-body-secondary">created by {{item.user}} {{item.created_at|timesince}} ago</small></p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}
