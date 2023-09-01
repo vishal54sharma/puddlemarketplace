@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block title %}
+SIGN UP 
+{% endblock %}
+{% block content %}
+
+    <div class="row m-3">
+
+        <div class="col-md-6 offset-md-3">
+            <h3>SIGN UP</h3>
+            <br>
+            <form method="POST" action="{% url 'index' %}">
+                {% csrf_token %}
+                
+                    {{form.as_p}}
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

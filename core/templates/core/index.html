@@ -4,46 +4,76 @@
 
 {% block content %}
 
-    <div class="card-group m-4">
-        {% for item in items %}
-            
-                <div class="card border-secondary mb-1" style="width: 18rem;">
-                    <img src="{{item.image.url}}" class="card-img-top" alt="...">
-                    <div class="card-header">{{item.name}}</div>
-                    <div class="card-body">
-                        
-                        <p class="card-text">{{item.description}}</p>
-                        <p class="card-text">$ {{item.price}}</p>
-                    </div>
-                    <a href="{% url 'detail' item.id %}" class="card-link">Show Details</a>
-                    <div class="card-footer">
-                        <small class="text-body-secondary">created {{item.created_at|timesince}} ago in </small>
-                        <small class="text-body-secondary">{{item.category}}</small>
-                    </div>
-                </div>
-            
+    {% if user.is_authenticated %}
 
-        {% endfor %}
-    </div>
 
-    <div class="card text-center">
-        <div class="card-header">
-          <h3>Categories</h3>
-        </div>
-        <div class="card-group">
-            {% for category in categories %}
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{category.name}}</h5>
-                        <p class="card-text">{{category.items.count}}</p>
-                    
-                    </div>
-                </div>
+        <div class="card-group m-4">
+            {% for item in items %}
                 
+                    <div class="card border-secondary mb-1" style="width: 18rem;">
+                        <img src="{{item.image.url}}" class="card-img-top" alt="...">
+                        <div class="card-header">{{item.name}}</div>
+                        <div class="card-body">
+                            
+                            <p class="card-text">{{item.description}}</p>
+                            <p class="card-text">$ {{item.price}}</p>
+                        </div>
+                        <a href="{% url 'detail' item.id %}" class="card-link">Show Details</a>
+                        <div class="card-footer">
+                            <small class="text-body-secondary">created {{item.created_at|timesince}} ago in </small>
+                            <small class="text-body-secondary">{{item.category}}</small>
+                        </div>
+                    </div>
+                
+
             {% endfor %}
         </div>
-        
-    </div>
+
+        <div class="card text-center">
+            <div class="card-header">
+            <h3>Categories</h3>
+            </div>
+            <div class="card-group">
+                {% for category in categories %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{category.name}}</h5>
+                            <p class="card-text">{{category.items.count}}</p>
+                        
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+            </div>
+            
+        </div>
+
+    {% else %}
+        <div class="row m-3">
+            <div class="col-md-6 offset-md-3">
+                <h3>LOGIN</h3>
+                <br>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    
+                        <div class="mb-3">
+                        
+                        <input type="text" class="form-control"  aria-describedby="emailHelp" name="username" placeholder="user name" required>
+                        
+                        </div>
+                        <div class="mb-3">
+                        
+                        <input type="password" class="form-control" name="password" placeholder="password" required>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-secondary">LOGIN</button>
+                    
+
+                </form>
+            </div>
+        </div>
+
+    {% endif %}
    
 
     

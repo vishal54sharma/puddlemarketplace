@@ -22,15 +22,31 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">BROWSE</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">SIGN UP</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">LOGIN</a>
-                  </li>
+                  
+                  {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logoutUser' %}">LOGOUT</a>
+                    </li>
+                  {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'signupUser' %}">SIGN UP</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'loginUser' %}">LOGIN</a>
+                    </li>
+                  {% endif %}
               </div>
             </div>
           </nav>
+          
+          {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
     
         {% block content %}
     
