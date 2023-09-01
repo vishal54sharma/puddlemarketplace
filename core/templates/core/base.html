@@ -17,16 +17,23 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent" >
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">NEW ITEM</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'new' %}">NEW ITEM</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">BROWSE</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'searchItem' %}">BROWSE</a>
                   </li>
                   
                   {% if request.user.is_authenticated %}
                     <li class="nav-item">
+                      <li class="nav-item">
+                        <a class="nav-link" href="">INBOX</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'allItems' %}">DASHBOARD</a>
+                      </li>
                       <a class="nav-link" href="{% url 'logoutUser' %}">LOGOUT</a>
                     </li>
+                    
                   {% else %}
                     <li class="nav-item">
                       <a class="nav-link" href="{% url 'signupUser' %}">SIGN UP</a>

@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+    
+   
+
+        <h2>My Items</h2>
+        <div class="card-group m-4">
+            
+            {% for item in items %}
+                
+                    <div class="card border-secondary mb-1" style="width: 18rem;">
+                        <img src="{{item.image.url}}" class="card-img-top" alt="...">
+                        <div class="card-header">{{item.name}}</div>
+                        <div class="card-body">
+                            
+                            <p class="card-text">{{item.description}}</p>
+                            <p class="card-text">$ {{item.price}}</p>
+                        </div>
+                        <div class="btn-group m-2" role="group">
+                            <a href="{% url 'detail' item.id %}" class="btn btn-outline-primary" role="button">Show Details</a>
+                            {% if item.created_by == request.user %}
+                                <a href="{% url 'editItem' item.id %}" class="btn btn-outline-secondary"  role="button">Edit Details</a>
+                                <a href="{% url 'deleteItem' item.id %}" class="btn btn-outline-danger" id="deleteitem" role="button">Delete Item</a>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-body-secondary">created {{item.created_at|timesince}} ago in </small>
+                            <small class="text-body-secondary">{{item.category}}</small>
+                        </div>
+                    </div>
+
+                    
+
+            {% endfor %}
+        </div>
+
+        
+
+    
+   
+
+    
+
+    
+
+{% endblock %}
