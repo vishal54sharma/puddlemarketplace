@@ -15,7 +15,9 @@
                 <p class="card-text"><b>Description</b> : {{item.description}}</p>
                 <p class="card-text"><b>Price</b> : {{item.price}} $</p>
                 <p class="card-text"><small class="text-body-secondary">created by {{item.created_by}} {{item.created_at|timesince}} ago</small></p>
-                <a href="#" class="btn btn-success" tabindex="-1" role="button" aria-disabled="true">Contact Seller</a>
+                {% if request.user != item.created_by %}
+                    <a href="{% url 'new_conversation' item.id %}" class="btn btn-success" tabindex="-1" role="button" aria-disabled="true">Contact Seller</a>
+                {% endif %}
                 </div>
             </div>
             </div>

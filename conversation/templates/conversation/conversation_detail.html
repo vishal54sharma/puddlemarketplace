@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Inbox {% endblock %}
+
+{% block content %}
+
+{% for message in conversation.messages.all %}
+    {% if message.created_by == request.user %}
+        <div class="row m-2 text-bg-info p-3 rounded">
+            <b><p>{{message.created_by}} | {{message.created_at}}</p></b>
+            <p>{{message.content}}</p>
+            
+
+        </div>
+    {% else %}
+        
+        <div class="row m-2 text-bg-light p-3 rounded">
+            <b><p>{{message.created_by}} | {{message.created_at}}</p></b>
+            <p>{{message.content}}</p>
+            
+
+        </div>
+
+
+    {% endif %}
+
+    {% endfor %}
+
+
+    <form method="POST" action="" class="m-3">
+        {% csrf_token %}
+
+    
+
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+
+
+{% endblock %}

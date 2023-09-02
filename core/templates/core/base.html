@@ -26,7 +26,7 @@
                   {% if request.user.is_authenticated %}
                     <li class="nav-item">
                       <li class="nav-item">
-                        <a class="nav-link" href="">INBOX</a>
+                        <a class="nav-link" href="{% url 'inbox' %}">INBOX</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="{% url 'allItems' %}">DASHBOARD</a>
